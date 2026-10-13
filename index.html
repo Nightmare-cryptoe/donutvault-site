@@ -3,203 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DonutVault | DonutSMP Shop</title>
+    <title>DonutVault - DonutSMP Marketplace</title>
     <style>
         :root {
-            --bg-color: #0f0f12;
-            --card-bg: #16161f;
-            --accent-color: #ff007a;
-            --text-color: #ffffff;
-            --text-muted: #a0a0b0;
+            --wood-dark: #3E2723;
+            --wood-medium: #5D4037;
+            --wood-light: #8D6E63;
+            --gold: #FFD700;
+            --gold-hover: #FFC107;
+            --parchment: #F5F5DC;
+            --text-light: #FFF8E1;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #2D1A14;
+            /* Wooden plank texture simulation */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 0, 0, 0.4) 1px, transparent 1px);
+            background-size: 40px 120px;
+            color: var(--text-light);
+            padding: 20px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            min-height: 100vh;
         }
-        header {
-            width: 100%;
-            padding: 40px 20px;
-            text-align: center;
-            background: linear-gradient(180deg, #1b1b27 0%, var(--bg-color) 100%);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 3rem;
-            color: var(--accent-color);
-            text-shadow: 0 0 15px rgba(255, 0, 122, 0.4);
-        }
-        header p {
-            color: var(--text-muted);
-            margin-top: 10px;
-        }
-        .container {
-            max-width: 1100px;
-            width: 90%;
-            margin: 20px auto;
-        }
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 10px;
-        }
-        /* Calculator Styles */
-        .calculator-card {
-            background-color: var(--card-bg);
+
+        .marketplace-container {
+            background-color: var(--wood-medium);
+            border: 8px solid var(--wood-dark);
             border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.7);
+            max-width: 550px;
+            width: 100%;
             padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-            border: 1px solid #222235;
+            text-align: center;
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+
+        header h1 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
         }
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            border: 1px solid #222235;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+
+        .subtitle {
+            font-style: italic;
+            color: var(--parchment);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            text-shadow: 1px 1px 2px #000;
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 0, 122, 0.1);
+
+        .shop-sign {
+            background-color: var(--wood-dark);
+            border: 3px dashed var(--gold);
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
         }
-        .card h3 {
-            margin-top: 0;
-        }
-        .price {
-            font-size: 1.5rem;
-            color: var(--accent-color);
+
+        .rate-info {
+            font-size: 1.1rem;
+            color: var(--gold);
             font-weight: bold;
-            margin: 15px 0;
+            text-shadow: 1px 1px 1px #000;
         }
-        input, select {
-            width: 100%;
-            padding: 12px;
-            background-color: #1f1f2e;
-            border: 1px solid #33334d;
+
+        .calculator-box {
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--wood-dark);
             border-radius: 6px;
-            color: white;
-            font-size: 1rem;
-            box-sizing: border-box;
-            margin-top: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .calculator-box h2 {
+            color: var(--parchment);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px #000;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--wood-light);
+            padding-bottom: 5px;
+        }
+
+        .input-group {
             margin-bottom: 15px;
         }
-        .btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1rem;
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--parchment);
+            border: 3px solid var(--wood-dark);
+            color: #333;
             font-weight: bold;
-            border-radius: 6px;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--gold);
+        }
+
+        .price-display {
+            background-color: var(--wood-dark);
+            border: 2px solid var(--gold);
+            border-radius: 4px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .price-display span {
+            display: block;
+        }
+
+        .price-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        .price-amount {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+            margin-top: 5px;
+        }
+
+        .checkout-btn {
+            background-color: var(--gold);
+            color: var(--wood-dark);
+            border: 3px solid var(--wood-dark);
+            border-radius: 4px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
             cursor: pointer;
             width: 100%;
-            transition: opacity 0.2s;
+            margin-top: 10px;
+            box-shadow: 0 4px 0 var(--wood-dark);
+            transition: all 0.1s ease;
         }
-        .btn:hover {
-            opacity: 0.9;
+
+        .checkout-btn:hover {
+            background-color: var(--gold-hover);
+        }
+
+        .checkout-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: var(--wood-light);
         }
     </style>
 </head>
 <body>
 
+<div class="marketplace-container">
     <header>
-        <h1>DONUTVAULT</h1>
-        <p>Automated DonutSMP Currency & Item Shop</p>
+        <h1>DonutVault</h1>
+        <div class="subtitle">🪵 Trusted DonutSMP Economy Trading Post 🪵</div>
     </header>
 
-    <div class="container">
-        <!-- Economy Section -->
-        <div class="section-title">Buy DonutSMP Money</div>
-        <div class="calculator-card">
-            <h3>Currency Calculator</h3>
-            <p style="color: var(--text-muted);">Rate: \$0.031 per 1,000,000 (1M)</p>
-            
-            <label for="amount">Enter Amount in Millions (M):</label>
-            <input type="number" id="amount" value="10" min="1" oninput="calculatePrice()">
+    <div class="shop-sign">
+        <span class="rate-info">✨ Current Exchange Rate: 1,000,000 (1M) = \$0.031 ✨</span>
+    </div>
 
-            <label for="username">Minecraft Username:</label>
-            <input type="text" id="username" placeholder="e.g., Notch" required>
-
-            <div class="price">Total Price: \$<span id="total-price">0.31</span></div>
-            <button class="btn" onclick="redirectToPaymento('money')">Purchase via Paymento</button>
+    <!-- Money Calculator Form -->
+    <div class="calculator-box">
+        <h2>💰 Currency Calculator</h2>
+        
+        <div class="input-group">
+            <label for="amount">In-Game Money Amount (in Millions):</label>
+            <input type="number" id="amount" value="10" min="1" step="1" oninput="calculatePrice()">
         </div>
 
-        <!-- Items & Bundles Section -->
-        <div class="section-title">Items & Bundles</div>
-        <div class="grid">
-            <!-- Item 1 -->
-            <div class="card">
-                <div>
-                    <h3>Ultimate Starter Bundle</h3>
-                    <p style="color: var(--text-muted);">Get a massive headstart with high-tier gear and safe vaults.</p>
-                </div>
-                <div>
-                    <div class="price">\$4.99</div>
-                    <button class="btn" onclick="redirectToPaymento('bundle_starter')">Buy Now</button>
-                </div>
-            </div>
+        <div class="input-group">
+            <label for="ign">Minecraft In-Game Name (IGN):</label>
+            <input type="text" id="ign" placeholder="e.g., Stev_Donut" required>
+        </div>
 
-            <!-- Item 2 -->
-            <div class="card">
-                <div>
-                    <h3>DonutVault God Set</h3>
-                    <p style="color: var(--text-muted);">Full custom enchanted armor set + keys.</p>
-                </div>
-                <div>
-                    <div class="price">\$2.50</div>
-                    <button class="btn" onclick="redirectToPaymento('god_set')">Buy Now</button>
-                </div>
-            </div>
+        <div class="price-display">
+            <span class="price-label">Total Cost (USD)</span>
+            <span class="price-amount" id="total-price">\$0.31</span>
         </div>
     </div>
 
-    <script>
-        const RATE_PER_MILLION = 0.031;
+    <button class="checkout-btn" onclick="initiatePaymentoCheckout()">Purchase via Paymento</button>
 
-        function calculatePrice() {
-            const amountInput = document.getElementById('amount').value;
-            const totalPrice = (amountInput * RATE_PER_MILLION).toFixed(3);
-            document.getElementById('total-price').textContent = totalPrice;
+    <footer>
+        &copy; 2026 DonutVault. Not affiliated with DonutSMP or Mojang.
+    </footer>
+</div>
+
+<script>
+    const RATE_PER_MILLION = 0.031;
+
+    function calculatePrice() {
+        const amountInput = document.getElementById('amount').value;
+        const total = (amountInput * RATE_PER_MILLION).toFixed(3);
+        
+        // Formats to display standard currency rounding or keep precision
+        document.getElementById('total-price').innerText = '\$' + parseFloat(total).toFixed(2);
+    }
+
+    function initiatePaymentoCheckout() {
+        const amount = document.getElementById('amount').value;
+        const ign = document.getElementById('ign').value.trim();
+        const finalPrice = (amount * RATE_PER_MILLION).toFixed(3);
+
+        if (!ign) {
+            alert("Please enter your Minecraft In-Game Name (IGN) before checking out!");
+            return;
         }
 
-        function redirectToPaymento(productId) {
-            const username = document.getElementById('username')?.value || "Not Specified";
-            let finalPrice = 0;
-
-            if (productId === 'money') {
-                const amount = document.getElementById('amount').value;
-                finalPrice = (amount * RATE_PER_MILLION).toFixed(3);
-                
-                if(!username || username.trim() === "Not Specified") {
-                    alert("Please enter your Minecraft Username first!");
-                    return;
-                }
-                
-                // Replace this line with your actual static Paymento hosted checkout URL/API query integration
-                // For instance, appending custom query parameters for tracking:
-                window.location.href = `https://paymento.org{finalPrice}&desc=${amount}M+DonutSMP+Money+for+${username}`;
-            } else {
-                // Handle static items
-                alert(`Redirecting to Paymento checkout for product: ${productId}`);
-                // window.location.href = `https://paymento.org`;
-            }
+        if (amount <= 0) {
+            alert("Please enter a valid currency amount!");
+            return;
         }
-    </script>
+
+        alert(`Connecting to Paymento...\n\nOrder Info:\nShop: DonutVault\nBuying: ${amount}M DonutSMP Money\nIGN: ${ign}\nTotal: $${parseFloat(finalPrice).toFixed(2)}`);
+        
+        /* 
+           INTEGRATION NOTE FOR PAYMENTO API:
+           Replace this block with your actual Paymento gateway redirection payload.
+           Typically you will hit their payment link or API creation route:
+           
+           window.location.href = `https://paymento.org{finalPrice}&custom_fields={"ign":"${ign}","millions":"${amount}"}`;
+        */
+    }
+
+    // Run calculation once on page load
+    calculatePrice();
+</script>
+
 </body>
 </html>
