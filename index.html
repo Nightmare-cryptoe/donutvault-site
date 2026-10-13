@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonutVault | Premium DonutSMP Shop</title>
+    <style>
+        :root {
+            --bg-color: #0f0f12;
+            --card-bg: #16161e;
+            --accent-color: #ff007f;
+            --text-color: #ffffff;
+            --text-muted: #a0a0b8;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        header h1 {
+            color: var(--accent-color);
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        header p {
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding-bottom: 60px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .price {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            height: 60px;
+        }
+        .calculator {
+            margin: 15px 0;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 6px;
+        }
+        .calculator input {
+            width: 80%;
+            padding: 8px;
+            background: #252530;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>DonutVault</h1>
+        <p>The Ultimate Marketplace for DonutSMP Cash, Items & Bundles</p>
+    </header>
+
+    <div class="container">
+        <!-- CUSTOM MONEY CALCULATOR CARD -->
+        <div class="card">
+            <h3>DonutSMP Money</h3>
+            <p class="description">Buy server economy balances instantly. Custom amounts available.</p>
+            <div class="calculator">
+                <label style="display:block; margin-bottom:5px; font-size:0.85rem; color:var(--text-muted);">Amount (in Millions):</label>
+                <input type="number" id="moneyAmount" value="10" min="1" oninput="calculatePrice()">
+            </div>
+            <div class="price" id="calcPrice">$0.35</div>
+            <!-- Replace onclick URL with your custom bot checkout URL or payment system link -->
+            <button class="btn" onclick="redirectToPayment()">Buy Now</button>
+        </div>
+
+        <!-- ITEMS CARD -->
+        <div class="card">
+            <h3>God Apple Bundle</h3>
+            <p class="description">A pack of stacked notch apples to dominate PvP encounters instantly.</p>
+            <div class="price">$2.49</div>
+            <!-- Replace href with your Stripe Checkout link or PayPal button link -->
+            <a href="https://your-payment-gateway-link-here" class="btn">Buy Pack</a>
+        </div>
+
+        <!-- BUNDLE CARD -->
+        <div class="card">
+            <h3>Starter Vault Bundle</h3>
+            <p class="description">Includes $50M In-Game Money, 1x Full Diamond Set, and 16x Golden Apples.</p>
+            <div class="price">$4.99</div>
+            <!-- Replace href with your Stripe Checkout link or PayPal button link -->
+            <a href="https://your-payment-gateway-link-here" class="btn">Buy Bundle</a>
+        </div>
+    </div>
+
+    <script>
+        const pricePerMillion = 0.035;
+
+        function calculatePrice() {
+            const amountInput = document.getElementById('moneyAmount').value;
+            const amount = parseFloat(amountInput) || 0;
+            const finalPrice = (amount * pricePerMillion).toFixed(2);
+            document.getElementById('calcPrice').innerText = '$' + finalPrice;
+        }
+
+        function redirectToPayment() {
+            const amount = document.getElementById('moneyAmount').value;
+            // For a static site, you can pass parameters to a Discord webhook, your shop bot, or a custom payment gateway link.
+            alert('Redirecting to order processing for ' + amount + 'M DonutSMP Money!');
+            // window.location.href = "YOUR_PAYMENT_URL?amount=" + amount;
+        }
+    </script>
+</body>
+</html>
